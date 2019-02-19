@@ -3,9 +3,12 @@ import time
 
 class PreProcess:
 
-    def __init__(self, imagePath):
+    def __init__(self,sourcePath,imagePath):
         self.imagePath = imagePath
-        
+        self.sourcePath = sourcePath
+    
+           
+
 
     def resize(self):
 
@@ -13,10 +16,14 @@ class PreProcess:
 
         imgResize = img.resize((800,600), Image.LANCZOS)
          
-        timestamp = time.localtime().tm_sec
-        
-        imgFileName = "resized{}".format(timestamp)
-        imgResize.save(imgFileName, "jpeg")
+        self.timestamp = self.timestamp = "{}-{}-{}-{}-{}-{}".format(time.gmtime().tm_year,time.gmtime().tm_mon,time.gmtime().tm_mday,time.gmtime().tm_hour,time.gmtime().tm_min,time.gmtime().tm_sec)
 
+
+        imgResizePath = "{}/output/resized{}.png".format(self.sourcePath,self.timestamp)
+        imgResize.save(imgResizePath, "png")
+
+        return imgResizePath
+
+
+    
         
-        return imgFileName
