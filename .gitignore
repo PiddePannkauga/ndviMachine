@@ -1,3 +1,12 @@
 **/src/secrets/
 **/src/output/
+<<<<<<< HEAD
 **/src/input/
+=======
+**/src/input/
+*.swp
+*.pyc
+*.swo
+*.swx
+*.txt
+>>>>>>> Version 2 Av kamera
