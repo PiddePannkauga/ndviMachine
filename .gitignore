@@ -1,12 +1,11 @@
 **/src/secrets/
 **/src/output/
-<<<<<<< HEAD
 **/src/input/
-=======
-**/src/input/
+**/src/__pycache__
+
 *.swp
 *.pyc
 *.swo
 *.swx
 *.txt
->>>>>>> Version 2 Av kamera
+

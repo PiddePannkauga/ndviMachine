@@ -1,7 +1,7 @@
 from PIL import Image
 import numpy as numpy
 import matplotlib.pyplot as plt
-from matplotlib.colors import ListedColormap, LinearSegmentedColormap
+from matplotlib.colors import LinearSegmentedColormap
 
 
 
@@ -22,13 +22,12 @@ def ndvi(image,imageOutPath):
     redBlueSum[redBlueSum ==0] = 0.01
 
     arrNDVI = redBlueDiff/redBlueSum
-#    img_h, img_w = img.size()
+
 
     img = Image.fromarray(arrNDVI, 'P')
 
     ndviImg = plt.imshow(img,cmap=plt.cm.jet)
     cm=LinearSegmentedColormap.from_list('mylist', colors) 
-       #cm = ListedColormap(fastie)
     print(plt.cm.jet) 
 
     plt.imsave(imageOutPath,arrNDVI,cmap=cm)
