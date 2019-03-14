@@ -5,10 +5,13 @@
 from takePicture import TakePicture
 from imgPreProcess import PreProcess
 from cloudUpload import CloudUpload
-import imgNdviProcess 
+import matplotlib
+import imgNDVIProcess 
 import os
 import time
 import signal
+
+matplotlib.use('Agg')
 
 filePath = '/home/pi/ndviMachine/src'
 
@@ -23,17 +26,17 @@ imgResizeFilePath=preProcess.resize()
 
 
 processedImgFilename = "ndvi_{}.png".format(preProcess.timestamp)
-processedImgOutputPath = filePath+"/output/"+processedImgFilename
 
 
-processedFile=imgNdviProcess.ndvi(imgResizeFilePath,processedImgOutputPath)
+
+processedFile=imgNDVIProcess.ndvi(imgResizeFilePath,processedImgFilename,filePath+'/output/'+processedImgFilename)
 
 
-while not os.path.exists(processedImgOutputPath):
+while not os.path.exists(filePath+'/output/'+processedImgFilename):
     print("Fil processeras")
     time.sleep(5)
 
-cloudUpload = CloudUpload(processedImgOutputPath,processedImgFilename)
+cloudUpload = CloudUpload(filePath,processedImgFilename)
 cloudUpload.upload()
 
 

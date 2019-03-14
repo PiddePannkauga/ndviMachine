@@ -21,16 +21,22 @@ class CloudUpload:
         SERVICE_ACCOUNT_FILE = '/home/pi/ndviMachine/src/secrets/serviceaccount.json'
 
         
-        folder_id = '1lCeaVlXoaX9DxuXTl900QynK1Yy8XeL2'
+        folder_id_Fastie = '1lCeaVlXoaX9DxuXTl900QynK1Yy8XeL2'
+        folder_id_NDVI = '1MFCb9E29KAPOwMIgYENohiWHtFzIOdRM'
 
-        file_metadata = {'name': self.fileName,
-                        'parents': [folder_id]}
-        media = MediaFileUpload(self.filePath, mimetype = 'image/png')
-
+        file_metadata_Fastie = {'name': self.fileName,
+                        'parents': [folder_id_Fastie]}
+        media_Fastie = MediaFileUpload(self.filePath+'/output/'+self.fileName, mimetype = 'image/png')
+        
+        file_metadata_NDVI = {'name': self.fileName,
+                        'parents': [folder_id_NDVI]}
+        media_NDVI = MediaFileUpload('/home/pi/ndviMachine/src/ndvi/'+self.fileName, mimetype = 'image/png')
 
         credentials = service_account.Credentials.from_service_account_file(SERVICE_ACCOUNT_FILE, scopes = SCOPE)
 
         service = build("drive", "v3" , credentials = credentials)
 
-        file = service.files().create(body=file_metadata,media_body = media, fields = "parents").execute() 
+        file = service.files().create(body=file_metadata_Fastie,media_body = media_Fastie, fields = "parents").execute() 
+        
+        file = service.files().create(body=file_metadata_NDVI,media_body = media_NDVI, fields = "parents").execute() 
 

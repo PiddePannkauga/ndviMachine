@@ -1,4 +1,6 @@
 from picamera import PiCamera
+import time
+from fractions import Fraction 
 class TakePicture:
     
     camera = PiCamera()
@@ -10,11 +12,20 @@ class TakePicture:
     camera.hflip = True
     camera.vflip = True   
     camera.resolution = (1920,1080)
-#   camera.exposure_mode = 'off'
+    
+   # camera.framerate = Fraction(1,6)
+   # camera.shutter_speed = 6000000
+    #camera.exposure_mode = 'off'
+
+   # camera.iso = 800
+    
+
+
 
 
     def capture(self,path):
         self.path = "{}/input/testAWB.png".format(path)
+        time.sleep(3)
         self.camera.capture(self.path, "png")
         self.camera.close()
         

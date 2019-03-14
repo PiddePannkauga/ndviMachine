@@ -2,6 +2,7 @@
 **/src/output/
 **/src/input/
 **/src/__pycache__
+**/src/ndvi/
 
 *.swp
 *.pyc
