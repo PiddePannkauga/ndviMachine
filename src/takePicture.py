@@ -4,13 +4,13 @@ from fractions import Fraction
 class TakePicture:
     
     camera = PiCamera()
-    redAWB=1.43
-    blueAWB=0.86
+    redAWB=2.26
+    blueAWB=0.74
     customGains = (redAWB, blueAWB)
     camera.awb_mode = "off"
     camera.awb_gains = customGains
-    camera.hflip = True
-    camera.vflip = True   
+#    camera.hflip = True
+#    camera.vflip = True   
     camera.resolution = (1920,1080)
     
    # camera.framerate = Fraction(1,6)

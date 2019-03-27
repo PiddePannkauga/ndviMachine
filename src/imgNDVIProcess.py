@@ -104,10 +104,10 @@ def ndvi(image,processedImgFilename,imageOutPath):
     redBlueDiff = (arrR - arrB)
     redBlueSum = (arrR + arrB)
 
-    
+    redBlueSum[redBlueSum ==0] = 0.01
 
     arrNDVI = redBlueDiff/redBlueSum
-
+    
 
     plt.imsave('/home/pi/ndviMachine/src/ndvi/'+processedImgFilename,arrNDVI, vmin=-1.0,vmax=1.0)
 
