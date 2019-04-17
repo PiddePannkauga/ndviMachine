@@ -22,7 +22,7 @@ class CloudUpload:
 		SERVICE_ACCOUNT_FILE = '/home/pi/ndviMachine/src/secrets/serviceaccount.json'
 
 		#Folder Id's
-		folder_id_Fastie = ''
+		folder_id_Fastie = ' '
 		folder_id_NDVI = ''
 		folder_id_PreNDVI = ''	
 
