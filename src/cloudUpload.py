@@ -8,35 +8,46 @@ from apiclient.http import MediaFileUpload
 from google.oauth2 import service_account
 
 class CloudUpload:
-    
 
-    def __init__(self,filePath,fileName):
-        self.filePath = filePath
-        self.fileName = fileName
 
- 
-    def upload(self):
-        SCOPE = ["https://www.googleapis.com/auth/drive.file"]
+	def __init__(self,filePath,fileName,preNDVIFilepath,timestamp):
+		self.filePath = filePath
+		self.fileName = fileName
+		self.preNDVIFilepath = preNDVIFilepath
+		self.timestamp = timestamp
 
-        SERVICE_ACCOUNT_FILE = '/home/pi/ndviMachine/src/secrets/serviceaccount.json'
+	def upload(self):
+		SCOPE = ["https://www.googleapis.com/auth/drive.file"]
 
-        
-        folder_id_Fastie = '1lCeaVlXoaX9DxuXTl900QynK1Yy8XeL2'
-        folder_id_NDVI = '1MFCb9E29KAPOwMIgYENohiWHtFzIOdRM'
+		SERVICE_ACCOUNT_FILE = '/home/pi/ndviMachine/src/secrets/serviceaccount.json'
 
-        file_metadata_Fastie = {'name': self.fileName,
-                        'parents': [folder_id_Fastie]}
-        media_Fastie = MediaFileUpload(self.filePath+'/output/'+self.fileName, mimetype = 'image/png')
-        
-        file_metadata_NDVI = {'name': self.fileName,
-                        'parents': [folder_id_NDVI]}
-        media_NDVI = MediaFileUpload('/home/pi/ndviMachine/src/ndvi/'+self.fileName, mimetype = 'image/png')
+		#Folder Id's
+		folder_id_Fastie = ''
+		folder_id_NDVI = ''
+		folder_id_PreNDVI = ''	
 
-        credentials = service_account.Credentials.from_service_account_file(SERVICE_ACCOUNT_FILE, scopes = SCOPE)
+		#Fastie Metadata
+		file_metadata_Fastie = {'name': self.fileName,
+						'parents': [folder_id_Fastie]}
+		media_Fastie = MediaFileUpload(self.filePath+'/output/'+self.fileName, mimetype = 'image/png')
+		#NDVI Metadata
+		file_metadata_NDVI = {'name': self.fileName,
+						'parents': [folder_id_NDVI]}
+		media_NDVI = MediaFileUpload('/home/pi/ndviMachine/src/ndvi/'+self.fileName, mimetype = 'image/png')
 
-        service = build("drive", "v3" , credentials = credentials)
 
-        file = service.files().create(body=file_metadata_Fastie,media_body = media_Fastie, fields = "parents").execute() 
-        
-        file = service.files().create(body=file_metadata_NDVI,media_body = media_NDVI, fields = "parents").execute() 
+		file_metadata_PreNDVI = {'name': "preNDVI_{}".format(self.timestamp),
+						'parents': [folder_id_PreNDVI]}
+		media_PreNDVI = MediaFileUpload(self.preNDVIFilepath, mimetype = 'image/png')
+
+
+		credentials = service_account.Credentials.from_service_account_file(SERVICE_ACCOUNT_FILE, scopes = SCOPE)
+
+		service = build("drive", "v3" , credentials = credentials)
+
+		file = service.files().create(body=file_metadata_Fastie,media_body = media_Fastie, fields = "parents").execute() 
+
+		file = service.files().create(body=file_metadata_NDVI,media_body = media_NDVI, fields = "parents").execute() 
+
+		file = service.files().create(body=file_metadata_PreNDVI, media_body = media_PreNDVI, fields = "parents").execute() 
 
