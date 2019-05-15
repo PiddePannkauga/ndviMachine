@@ -9,3 +9,6 @@ Cleanup is needed and add relative paths.
   
 ![alt text](https://github.com/PiddePannkauga/ndviMachine/blob/master/CameraSystem.png)  
 Figure showing how the system is built to be modular
+
+![alt text](https://github.com/PiddePannkauga/ndviMachine/blob/master/DataAnalysis.png)
+Figure showing how the datachecker is built.
