@@ -13,4 +13,4 @@ Figure showing how the system is built to be modular
 
 
 ![alt text](https://github.com/PiddePannkauga/ndviMachine/blob/master/DataAnalysis.png)  
-Figure showing how the datachecker is built.
+Figure showing how NDVIChecker.py is built.
