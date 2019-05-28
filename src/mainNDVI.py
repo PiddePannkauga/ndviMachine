@@ -13,30 +13,24 @@ import signal
 
 matplotlib.use('Agg')
 
-filePath = '/home/pi/ndviMachine/src'
-
+filePath = './'
 
 camera = TakePicture()
-
 imgFileName=camera.capture(filePath)
+
 preProcess = PreProcess(filePath,imgFileName)
-
-
-imgResizeFilePath=preProcess.resize()
-
+preProcess.resize()
 
 processedImgFilename = "ndvi_{}.png".format(preProcess.timestamp)
 
+processedFile=imgNDVIProcess.ndvi(preProcess.imgResizePath,processedImgFilename,'./output/'+processedImgFilename)
 
 
-processedFile=imgNDVIProcess.ndvi(imgResizeFilePath,processedImgFilename,filePath+'/output/'+processedImgFilename)
-
-
-while not os.path.exists(filePath+'/output/'+processedImgFilename):
+while not os.path.exists(filePath+'output/'+processedImgFilename):
     print("Fil processeras")
     time.sleep(5)
-
-cloudUpload = CloudUpload(filePath,processedImgFilename)
+print(preProcess)
+cloudUpload = CloudUpload(filePath,processedImgFilename,preProcess.imgResizePath,preProcess.timestamp)
 cloudUpload.upload()
 
 

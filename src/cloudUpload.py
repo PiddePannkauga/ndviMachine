@@ -19,12 +19,12 @@ class CloudUpload:
 	def upload(self):
 		SCOPE = ["https://www.googleapis.com/auth/drive.file"]
 
-		SERVICE_ACCOUNT_FILE = '/home/pi/ndviMachine/src/secrets/serviceaccount.json'
+		SERVICE_ACCOUNT_FILE = 'secrets/serviceaccount.json'
 
 		#Folder Id's
-		folder_id_Fastie = ' '
-		folder_id_NDVI = ''
-		folder_id_PreNDVI = ''	
+		folder_id_Fastie = '1lCeaVlXoaX9DxuXTl900QynK1Yy8XeL2'
+		folder_id_NDVI = '1MFCb9E29KAPOwMIgYENohiWHtFzIOdRM'
+		folder_id_PreNDVI = '15yVlg4tNKD8iDTU64ZDQkPgHOf9g8Vef'	
 
 		#Fastie Metadata
 		file_metadata_Fastie = {'name': self.fileName,
@@ -33,7 +33,7 @@ class CloudUpload:
 		#NDVI Metadata
 		file_metadata_NDVI = {'name': self.fileName,
 						'parents': [folder_id_NDVI]}
-		media_NDVI = MediaFileUpload('/home/pi/ndviMachine/src/ndvi/'+self.fileName, mimetype = 'image/png')
+		media_NDVI = MediaFileUpload('./ndvi/'+self.fileName, mimetype = 'image/png')
 
 
 		file_metadata_PreNDVI = {'name': "preNDVI_{}".format(self.timestamp),

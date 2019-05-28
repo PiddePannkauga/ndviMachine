@@ -101,15 +101,15 @@ def ndvi(image,processedImgFilename,imageOutPath):
 
     arrR = numpy.asarray(imgR).astype('float')
     arrB = numpy.asarray(imgB).astype('float')
-    redBlueDiff = (arrR - arrB)
-    redBlueSum = (arrR + arrB)
+    redBlueDiff = (arrB - arrR)
+    redBlueSum = (arrB + arrR)
 
     redBlueSum[redBlueSum ==0] = 0.01
 
     arrNDVI = redBlueDiff/redBlueSum
     
 
-    plt.imsave('/home/pi/ndviMachine/src/ndvi/'+processedImgFilename,arrNDVI, vmin=-1.0,vmax=1.0)
+    plt.imsave('ndvi/'+processedImgFilename,arrNDVI, vmin=-1.0,vmax=1.0)
 
     fastiecm=LinearSegmentedColormap.from_list('mylist', colors) 
     plt.imsave(imageOutPath,arrNDVI,cmap=fastiecm, vmin=-1.0, vmax=1.0)

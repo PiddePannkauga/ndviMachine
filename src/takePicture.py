@@ -4,8 +4,8 @@ from fractions import Fraction
 class TakePicture:
     
     camera = PiCamera()
-    redAWB=2.26
-    blueAWB=0.74
+    redAWB=0.74
+    blueAWB=1.18
     customGains = (redAWB, blueAWB)
     camera.awb_mode = "off"
     camera.awb_gains = customGains
@@ -24,7 +24,7 @@ class TakePicture:
 
 
     def capture(self,path):
-        self.path = "{}/input/testAWB.png".format(path)
+        self.path = "{}input/testAWB.png".format(path)
         time.sleep(3)
         self.camera.capture(self.path, "png")
         self.camera.close()

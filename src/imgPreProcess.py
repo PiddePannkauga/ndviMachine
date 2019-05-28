@@ -6,6 +6,7 @@ class PreProcess:
     def __init__(self,sourcePath,imagePath):
         self.imagePath = imagePath
         self.sourcePath = sourcePath
+        self.imgResizePath= ""
     
            
 
@@ -19,10 +20,11 @@ class PreProcess:
         self.timestamp = self.timestamp = "{}-{}-{}-{}-{}-{}".format(time.gmtime().tm_year,time.gmtime().tm_mon,time.gmtime().tm_mday,time.gmtime().tm_hour,time.gmtime().tm_min,time.gmtime().tm_sec)
 
 
-        imgResizePath = "{}/output/resized{}.png".format(self.sourcePath,self.timestamp)
-        imgResize.save(imgResizePath, "png")
+        self.imgResizePath = "./output/resized{}.png".format(self.timestamp)
+        imgResize.save(self.imgResizePath, "png")
+        print(self.imgResizePath)
 
-        return imgResizePath
+        
 
 
     
